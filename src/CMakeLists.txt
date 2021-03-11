@@ -25,6 +25,7 @@ set(SRC_FILES
 >>>>>>> Init Optimizer
 =======
         ${CMAKE_CURRENT_LIST_DIR}/optimizer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/loss.cpp
         )
 >>>>>>> return line
 

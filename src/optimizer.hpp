@@ -9,7 +9,7 @@ namespace deepworks {
  */
 class Optimizer {
 public:
-    virtual void step(Matrix& W, Matrix& dW) = 0;
+    virtual void CPUstep(Matrix& W, const ConstMatrix& dW) = 0;
 };
 
 /*
@@ -19,7 +19,7 @@ class SGD : public Optimizer {
 public:
     explicit SGD(float lr);
 
-    void step(Matrix& W, Matrix& dW) override;
+    void CPUstep(Matrix& W, const ConstMatrix& dW) override;
     float get_learning_rate() const;
     void set_learning_rate(float lr);
 
