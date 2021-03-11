@@ -20,8 +20,13 @@ set(SRC_FILES
         ${CMAKE_CURRENT_LIST_DIR}/call.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tensor.cpp
         ${CMAKE_CURRENT_LIST_DIR}/kernels.cpp
+<<<<<<< HEAD
         ${CMAKE_CURRENT_LIST_DIR}/optimizer.cpp)
 >>>>>>> Init Optimizer
+=======
+        ${CMAKE_CURRENT_LIST_DIR}/optimizer.cpp
+        )
+>>>>>>> return line
 
 set(DeepWorks_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/")
 
