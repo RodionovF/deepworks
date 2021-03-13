@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kernels.hpp"
+#include "runtime/cpu/kernels/kernels.hpp"
 
 namespace deepworks {
 
@@ -20,7 +20,9 @@ public:
     explicit SGD(float lr);
 
     void CPUstep(Matrix& W, const ConstMatrix& dW) override;
+
     float get_learning_rate() const;
+
     void set_learning_rate(float lr);
 
 private:

@@ -1,5 +1,4 @@
 set(SRC_FILES
-<<<<<<< HEAD
     # Expression API
     ${CMAKE_CURRENT_LIST_DIR}/expression/placeholder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/expression/call.cpp
@@ -14,20 +13,9 @@ set(SRC_FILES
     # Runtime entities
     ${CMAKE_CURRENT_LIST_DIR}/runtime/tensor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/runtime/cpu/kernels/kernels.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/runtime/cpu/loss/loss.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/runtime/cpu/optimizer/optimizer.cpp
     )
-=======
-        ${CMAKE_CURRENT_LIST_DIR}/placeholder.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/call.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tensor.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/kernels.cpp
-<<<<<<< HEAD
-        ${CMAKE_CURRENT_LIST_DIR}/optimizer.cpp)
->>>>>>> Init Optimizer
-=======
-        ${CMAKE_CURRENT_LIST_DIR}/optimizer.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/loss.cpp
-        )
->>>>>>> return line
 
 set(DeepWorks_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/")
 
