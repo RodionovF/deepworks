@@ -43,6 +43,7 @@ dw::IDataset::OutShape custom::CIFAR10Dataset::shape() {
 
 void custom::CIFAR10Dataset::pull(int idx, dw::Tensor& X, dw::Tensor& y) {
     dw::io::ReadImage(m_info[idx].path, X);
+    HWC2CHW(X);
     normalize(X, 255);
 
     y.data()[0] = m_info[idx].label;
