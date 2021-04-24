@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <filesystem>
+#include <iostream>
 
 namespace dw = deepworks;
 namespace fs = std::filesystem;
@@ -38,14 +39,13 @@ size_t custom::CIFAR10Dataset::size() {
 }
 
 dw::IDataset::OutShape custom::CIFAR10Dataset::shape() {
-    return {dw::Shape{32 * 32 * 3}, dw::Shape{1}};
+    return {dw::Shape{3, 32, 32}, dw::Shape{1}};
 }
 
 void custom::CIFAR10Dataset::pull(int idx, dw::Tensor& X, dw::Tensor& y) {
     dw::io::ReadImage(m_info[idx].path, X);
     HWC2CHW(X);
     normalize(X, 255);
-
     y.data()[0] = m_info[idx].label;
 }
 
@@ -57,23 +57,27 @@ void custom::CIFAR10Dataset::HWC2CHW(deepworks::Tensor& image) {
     }
     image.copyTo(m_image);
 
+
     auto source_data = m_image.data();
     auto target_data = image.data();
 
-    size_t channel_stride = image_shape[0] * image_shape[1];
+    size_t channel_stride = 32 * 32;
 
     size_t source_index = 0;
     size_t target_index = 0;
     while (source_index < image.total()) {
         // R channel
+//        std::cout << "R" << std::endl;
         target_data[target_index] = source_data[source_index];
         source_index++;
 
         // G channel
+//        std::cout << "G" << std::endl;
         target_data[target_index + channel_stride] = source_data[source_index];
         source_index++;
 
         // B channel
+//        std::cout << "B" << std::endl;
         target_data[target_index + 2 * channel_stride] = source_data[source_index];
         source_index++;
 

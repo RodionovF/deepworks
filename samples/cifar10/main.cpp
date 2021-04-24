@@ -7,13 +7,29 @@
 namespace dw = deepworks;
 
 static dw::Model buildMNISTModel(int batch_size) {
-    int in_features  = 32*32*3;
-    int mid_features = 100;
+    int in_features  = 3*32*32;
+    int mid_features = 200;
     int out_features = 10;
 
-    dw::Placeholder in(dw::Shape{batch_size, in_features});
-    auto out = dw::Linear(mid_features, "linear0")(in);
+    std::array<int, 2> kernel_conv{5, 5};
+    std::array<int, 2> padding_conv{2, 2};
+    std::array<int, 2> stride_conv{1, 1};
+
+    std::array<int, 2> kernel_pool{2, 2};
+    std::array<int, 2> padding_pool{0, 0};
+    std::array<int, 2> stride_pool{2, 2};
+
+    dw::Placeholder in(dw::Shape{batch_size, 3, 32, 32});
+    auto out = dw::Convolution(4, kernel_conv, padding_conv, stride_conv, "conv1")(in);
     out = dw::ReLU("relu1")(out);
+    out = dw::MaxPooling(kernel_pool, padding_pool, stride_pool, "pool1")(out);
+
+    out = dw::Convolution(8, kernel_conv, padding_conv, stride_conv, "conv2")(out);
+    out = dw::ReLU("relu2")(out);
+    out = dw::MaxPooling(kernel_pool, padding_pool, stride_pool, "pool2")(out);
+
+    out = dw::Linear(mid_features, "linear0")(out);
+    out = dw::ReLU("relu3")(out);
     out = dw::BatchNorm1D(0.001, 0.05, "batchnorm1d")(out);
     out = dw::Linear(out_features, "linear2")(out);
     out = dw::Softmax("softmax3")(out);
