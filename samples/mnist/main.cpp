@@ -23,8 +23,8 @@ static dw::Model buildMNISTModel(int batch_size) {
 int main(int argc, char *argv[]) {
     // Configuration
     std::string root = argv[1];
-    auto train_dir   = root + "train";
-    auto test_dir    = root + "test";
+    auto train_dir   = root + "/train";
+    auto test_dir    = root + "/test";
     int batch_size   = std::atoi(argv[2]);
     int num_epochs   = std::atoi(argv[3]);
     int freq         = std::atoi(argv[4]);
