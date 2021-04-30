@@ -1,3 +1,5 @@
+#include <iostream>
+#include <iomanip>
 #include "runtime/cpu/layers/cpumaxpooling.hpp"
 #include "runtime/cpu/kernels/kernels.hpp"
 
@@ -56,4 +58,25 @@ void deepworks::cpu::CPUMaxPooling::backward(const std::vector<deepworks::Tensor
     const auto& stride  = m_info.impl().attrs["stride"].get<std::array<int, 2>>();
 
     deepworks::CPUMaxPoolingInputGrad(grad_output, max_indices, im2col_buf, grad_input, kernel, padding, stride);
+
+    std::cout << "Indices: " << max_indices.total() << std::endl;
+    for(size_t i = 0; i < max_indices.total(); ++i) {
+        std::cout << max_indices.data()[i] <<  " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "Original: " << grad_input.total() << std::endl;
+    std::cout << "grad otput: " << grad_output.shape() << std::endl;
+    for (size_t i = 0; i < grad_output.total(); ++i) {
+        std::cout << grad_output.data()[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "grad input: " << grad_input.shape() << std::endl;
+    for (size_t i = 0; i < 32; i++) {
+        for (size_t j = 0; j < 32; j++) {
+            std::cout << grad_input.data()[i * 32 + j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }

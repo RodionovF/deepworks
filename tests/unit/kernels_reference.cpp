@@ -416,6 +416,11 @@ void dw::reference::CPUMaxPooling2DBackward(const deepworks::Tensor& input, cons
                                                                                 {1, 1}, /* Dilation*/
                                                                                 false,
                                                                                 indices_torch);
+    std::cout << "Ref indices" << std::endl;
+    for (size_t i = 0; i < indices_torch.numel(); i++) {
+        std::cout << indices_torch.data_ptr<long>()[i] << " ";
+    }
+    std::cout << std::endl;
 
     std::copy_n(grad_input_torch.data_ptr<float>(), grad_input_torch.numel(), grad_input.data());
 }
